@@ -17,7 +17,7 @@ This is an API written for the Cosmic Ray eLab to provied an easier way of searc
 
 This API uses the JSON format on returning information regarless of the informaion (with the execption of downloading files and really big errors on the server's end). Each part of the API uses this basic structure:
 
-```json
+```
 {
 request: {
 	pass: "true"
@@ -66,7 +66,7 @@ Commone file types include:
 
 ### Example response
 
-```json
+```
 {
 	request: {
 		pass: "true"
@@ -117,7 +117,7 @@ Or
 
 ### Example Response
 
-```json
+```
 {
 	request: {
 		pass: "true"
