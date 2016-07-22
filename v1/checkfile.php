@@ -1,4 +1,5 @@
 <?php
+# Author: Thomas Hein
 
 # The purpose of this file is to make sure a file exists on the file system before downloading it.
 # This file will send a response in JSON (the GetFile script will not, thus the existence of this script).

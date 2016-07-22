@@ -1,4 +1,6 @@
 <?php
+# Author: Thomas Hein
+
 # File Functions
 # I hate writting the same piece of code twice, so I create functions in files that will be used twice.
 

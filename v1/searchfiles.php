@@ -1,4 +1,5 @@
 <?php
+# Author: Thomas Hein
 
 # This file will help search for files. It requires a DetectorID, Year, and start & finish monthday.
 # Someone may specify a the specific monthday, specifc wanted files, and specific indexes.

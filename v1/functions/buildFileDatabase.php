@@ -1,4 +1,5 @@
 <?php
+# Author: Thomas Hein
 
 # This file will (quickly) run through every file in each detector's folder.
 # Depending on how PHP is setup, this may not working in the production version.

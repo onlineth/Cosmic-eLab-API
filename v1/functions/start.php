@@ -1,4 +1,5 @@
 <?php
+# Author: Thomas Hein
 
 # This file will connect to the database and 
 # perform any functions that should be executed

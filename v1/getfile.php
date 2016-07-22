@@ -1,4 +1,6 @@
 <?php
+# Author: Thomas Hein
+
 # Provide a Unique ID OR the detectorID, year, monthday, and channel number
 # This is currently the only file where JSON is NOT given
 # This file will use the file system over the database
