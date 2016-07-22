@@ -15,55 +15,55 @@ if (!file_exists("functions/start.php")) {
 }
 
 # Get the start script to connect to database and execute possible other functions
-require_once("functions/start.php");
+require_once "functions/start.php";
 
 # Let's see what's given
 
 # We need these
-if (!(checkGetSet(array ('detectorid', 'year')))) {
+if (!(checkGetSet(array('detectorid', 'year')))) {
 	show_error('You need to specify a DetectorID and a Year', 'searchfiles');
 }
 
 # Need either an exact monthday or a start monthday and finish monthday
-if (!((checkGetSet(array ('startmonthday', 'endmonthday'))) or (checkGetSet(array ('monthday'))))) {
+if (!((checkGetSet(array('startmonthday', 'endmonthday'))) or (checkGetSet(array('monthday'))))) {
 	show_error('You need to specify a StartMonthDay & an EndMonthDay OR simply give a MonthDay', 'searchfiles');
 }
 
-$arg_detectorid =  zFix($_GET['detectorid']);
-$arg_year =  zFix($_GET['year']);
+$arg_detectorid = zFix($_GET['detectorid']);
+$arg_year = zFix($_GET['year']);
 
 # detector id should be a 4 digit integer
 if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) == 4)) {
-show_error("The DetectorID is inncorrect. Make sure if there is a leading 0, to add it to the parameter.", "searchfiles");
+	show_error("The DetectorID is inncorrect. Make sure if there is a leading 0, to add it to the parameter.", "searchfiles");
 }
 
 # year should be a 4 digit integer
 if (!(is_numeric($arg_year)) or !(strlen($arg_year) == 4)) {
-show_error("The year given is inncorrect.", "searchfiles");
+	show_error("The year given is inncorrect.", "searchfiles");
 }
 
-if(checkGetSet(array ('monthday'))) {
-	$arg_monthday =  zFix($_GET['monthday']);
-	
+if (checkGetSet(array('monthday'))) {
+	$arg_monthday = zFix($_GET['monthday']);
+
 	# monthday should be a 4 digit integer
 	if (!(is_numeric($arg_monthday)) or !(strlen($arg_monthday) == 4)) {
-	show_error("The MonthDay is incorrect.", "searchfiles");
+		show_error("The MonthDay is incorrect.", "searchfiles");
 	}
 } else {
-	$arg_startmonthday =  zFix($_GET['startmonthday']);
-	$arg_endmonthday =  zFix($_GET['endmonthday']);
+	$arg_startmonthday = zFix($_GET['startmonthday']);
+	$arg_endmonthday = zFix($_GET['endmonthday']);
 
 	# monthday should be a 4 digit integer
 	if (!(is_numeric($arg_startmonthday)) or !(strlen($arg_startmonthday) == 4)) {
-	show_error("The Start MonthDay is incorrect.", "searchfiles");
+		show_error("The Start MonthDay is incorrect.", "searchfiles");
 	}
 
 	# monthday should be a 4 digit integer
 	if (!(is_numeric($arg_endmonthday)) or !(strlen($arg_endmonthday) == 4)) {
-	show_error("The End MonthDay is incorrect.", "searchfiles");
+		show_error("The End MonthDay is incorrect.", "searchfiles");
 	}
 
-	if ($arg_startmonthday>$arg_endmonthday) {
+	if ($arg_startmonthday > $arg_endmonthday) {
 		show_error("The Start MonthDay cannot be greator than the End MonthDay.", "searchfiles");
 	}
 }
@@ -82,12 +82,12 @@ if (isset($arg_monthday)) {
 # Add index if any
 # I'm really not sure how this would be of use but whatever
 if (isset($_GET['index'])) {
-	
-	$arg_index =  zFix($_GET['index']);
+
+	$arg_index = zFix($_GET['index']);
 
 	# Index should be an integer
 	if (!(is_numeric($arg_index))) {
-	show_error("The Index should be a number.", "searchfiless");
+		show_error("The Index should be a number.", "searchfiless");
 	}
 
 	$query_where = "$query_where AND index=$arg_index";
@@ -126,7 +126,7 @@ $query_result = pg_fetch_all(db_pos_query($search_query, $db));
 # Check if any
 if (!($query_result)) {
 	# There arn't any
-	$reponseArray = array ("request" => array("pass" => "true"), "main" => array("searchfiles" => "true"), "filelist" => '', "numberOfFiles" => '0', 'limit' => 500);
+	$reponseArray = array("request" => array("pass" => "true"), "main" => array("searchfiles" => "true"), "filelist" => '', "numberOfFiles" => '0', 'limit' => 500);
 	print json_encode($reponseArray);
 
 } else {
@@ -144,7 +144,7 @@ if (!($query_result)) {
 	}
 
 	# All done, spit this out
-	$reponseArray = array ("request" => array("pass" => "true"), "main" => array("searchfiles" => "true"), "filelist" => $file_list, "numberOfFiles" => count($file_list), 'limit' => 500);
+	$reponseArray = array("request" => array("pass" => "true"), "main" => array("searchfiles" => "true"), "filelist" => $file_list, "numberOfFiles" => count($file_list), 'limit' => 500);
 	print json_encode($reponseArray);
 }
 

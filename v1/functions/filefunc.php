@@ -10,7 +10,7 @@ if (!file_exists("functions/start.php")) {
 }
 
 # Get the start script to connect to database and execute possible other functions
-require_once("functions/start.php");
+require_once "functions/start.php";
 
 function lookUpFile($db, $data_location, $allowed_filetypes) {
 	# This file will check to see if the arguments given in the GET request look ok
@@ -35,7 +35,7 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 
 		# FileID should be an integer
 		if (!is_numeric($arg_fileid)) {
-		show_error("The FileID given is not numerical.", "filefound");
+			show_error("The FileID given is not numerical.", "filefound");
 		}
 
 		# Lookup the fileid in the database
@@ -46,62 +46,60 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 
 		# Check to see if there's something actually there
 		if (!($query_result[0])) {
-		show_error("No file has been found with the given FileID.", "filefound");
+			show_error("No file has been found with the given FileID.", "filefound");
 		}
 
 		# Set the other arguments
-		$arg_detectorid =  zFix($query_result[1]);
-		$arg_year =  zFix($query_result[2]);
-		$arg_monthday =  zFix($query_result[3]);
-		$arg_index =  zFix($query_result[4]);
-		$arg_filetype =  $query_result[5];
-
-
+		$arg_detectorid = zFix($query_result[1]);
+		$arg_year = zFix($query_result[2]);
+		$arg_monthday = zFix($query_result[3]);
+		$arg_index = zFix($query_result[4]);
+		$arg_filetype = $query_result[5];
 
 	} elseif ($_GET['filetype'] != "geo") {
 
 		# Get the GET parameters into their respective variables
-		$arg_detectorid =  zFix($_GET['detectorid']);
-		$arg_year =  zFix($_GET['year']);
-		$arg_monthday =  zFix($_GET['monthday']);
-		$arg_index =  zFix($_GET['index']);
-		$arg_filetype =  $_GET['filetype'];
+		$arg_detectorid = zFix($_GET['detectorid']);
+		$arg_year = zFix($_GET['year']);
+		$arg_monthday = zFix($_GET['monthday']);
+		$arg_index = zFix($_GET['index']);
+		$arg_filetype = $_GET['filetype'];
 
 		# detector id should be a 4 digit integer
 		if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) == 4)) {
-		show_error("The DetectorID is inncorrect.", "filefound");
+			show_error("The DetectorID is inncorrect.", "filefound");
 		}
 
 		# year should be a 4 digit integer
 		if (!(is_numeric($arg_year)) or !(strlen($arg_year) == 4)) {
-		show_error("The year given is inncorrect.", "filefound");
+			show_error("The year given is inncorrect.", "filefound");
 		}
 
 		# monthday should be a 4 digit integer
 		if (!(is_numeric($arg_monthday)) or !(strlen($arg_monthday) == 4)) {
-		show_error("The MonthDay is incorrect.", "filefound");
+			show_error("The MonthDay is incorrect.", "filefound");
 		}
 
 		# FileType should be an integer
 		if (!in_array($arg_filetype, $allowed_filetypes)) {
-		show_error("The file type is not on the accepted file type list.", "filefound");
+			show_error("The file type is not on the accepted file type list.", "filefound");
 		}
 
 		# Index should be an integer
 		if (!(is_numeric($arg_index))) {
-		show_error("The Index should be a number.", "filefound");
+			show_error("The Index should be a number.", "filefound");
 		}
 
 	} else {
 		# The filetype is for sure geo, just check the detectorid
-		
+
 		# Get the GET parameters into their respective variables
-		$arg_detectorid =  zFix($_GET['detectorid']);
-		$arg_filetype =  $_GET['filetype'];
+		$arg_detectorid = zFix($_GET['detectorid']);
+		$arg_filetype = $_GET['filetype'];
 
 		# detector id should be a 4 digit integer
 		if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) == 4)) {
-		show_error("The DetectorID is inncorrect.", "filefound");
+			show_error("The DetectorID is inncorrect.", "filefound");
 		}
 	}
 
@@ -120,7 +118,7 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 	}
 
 	# Real file path
-	$realFilePath = $data_location.$arg_detectorid.'/'.$filename;
+	$realFilePath = $data_location . $arg_detectorid . '/' . $filename;
 
 	# Check to see if the file is in the file system
 	if (!file_exists($realFilePath)) {

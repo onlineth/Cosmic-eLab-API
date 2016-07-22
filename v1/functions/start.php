@@ -1,7 +1,7 @@
 <?php
 # Author: Thomas Hein
 
-# This file will connect to the database and 
+# This file will connect to the database and
 # perform any functions that should be executed
 # on the start of the API
 
@@ -18,20 +18,20 @@ if (!file_exists("$openDirectory/config.php")) {
 }
 
 # Get the config.php file to load important variables
-require_once("$openDirectory/config.php");
+require_once "$openDirectory/config.php";
 
 # Connect to the database
-$host = "host=".$database_host;
-$port = "port=".$database_port;
-$dbname      = "dbname=".$database_name;
-$credentials = "user=".$database_user." password=".$database_password;
+$host = "host=" . $database_host;
+$port = "port=" . $database_port;
+$dbname = "dbname=" . $database_name;
+$credentials = "user=" . $database_user . " password=" . $database_password;
 
 $db = pg_connect("$host $port $dbname $credentials");
 global $db;
 
 # Check to see if there was an error
-if(!$db){
-  show_error("Unable to open database\n", "Server Side Processing");
+if (!$db) {
+	show_error("Unable to open database\n", "Server Side Processing");
 }
 
 # List of functions to use over the entire API
@@ -39,8 +39,8 @@ if(!$db){
 # Show an error based in JSON format
 function show_error($error_msg, $type) {
 	header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-	$reponseArray = array ("request" => array("pass" => "false"), "main" => array($type => "false", "message" => $error_msg));
-	
+	$reponseArray = array("request" => array("pass" => "false"), "main" => array($type => "false", "message" => $error_msg));
+
 	# Errors MUST KILL
 	die(json_encode($reponseArray));
 }
@@ -51,8 +51,8 @@ function db_pos_query($sql, $db) {
 	$ret = pg_query($db, $sql);
 
 	# Check for any errors
-	if(!$ret){
-	  show_error("Database Error: ".pg_last_error($db), "Server Side Processing");
+	if (!$ret) {
+		show_error("Database Error: " . pg_last_error($db), "Server Side Processing");
 	}
 
 	# It's all good
@@ -71,7 +71,7 @@ function checkGetSet($givenArray) {
 
 # This should be run when the php connection is about to close
 function quit($db) {
-    pg_close($db);
+	pg_close($db);
 }
 
 # This function fixes GET arguments where if the the leading number if 0 is removed,

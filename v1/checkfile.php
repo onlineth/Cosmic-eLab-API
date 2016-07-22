@@ -11,7 +11,7 @@ if (!file_exists("functions/start.php")) {
 }
 
 # Get the start script to connect to database and execute possible other functions
-require_once("functions/start.php");
+require_once "functions/start.php";
 
 # Check the file before loading it
 if (!file_exists("functions/filefunc.php")) {
@@ -19,14 +19,14 @@ if (!file_exists("functions/filefunc.php")) {
 }
 
 # Get the start script to connect to database and execute possible other functions
-require_once("functions/filefunc.php");
+require_once "functions/filefunc.php";
 
 # Ok, let's lookup the file
 if (lookUpFile($db, $data_location, $allowed_filetypes)) {
-	$reponseArray = array ("request" => array("pass" => "true"), "main" => array("filefound" => "true"));
+	$reponseArray = array("request" => array("pass" => "true"), "main" => array("filefound" => "true"));
 	print json_encode($reponseArray);
 } else {
-	$reponseArray = array ("request" => array("pass" => "true"), "main" => array("filefound" => "false"));
+	$reponseArray = array("request" => array("pass" => "true"), "main" => array("filefound" => "false"));
 	print json_encode($reponseArray);
 }
 
