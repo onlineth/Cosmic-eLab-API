@@ -11,7 +11,7 @@ This is an API written for the Cosmic Ray eLab to provied an easier way of searc
 2. Set the $data_location variable to the correct location of the data directory
 3. Set the database credentials to their appropriate values
 4. Execute the createTables.sql in your database to create the table for the API
-5. Run the buildFileDatabase.php in your browser. Note: This process may take time and you may have to increase php's [max execution time](php.net/manual/en/info.configuration.php#ini.max-execution-time) located in your php.ini file - when this completes, you should see a message displaying the number of files added to the table without any errors
+5. Run the buildFileDatabase.php in your browser. Note: This process may take time and you may have to increase php's [max execution time](https://php.net/manual/en/info.configuration.php#ini.max-execution-time) located in your php.ini file - when this completes, you should see a message displaying the number of files added to the table without any errors
 
 # How to use
 
