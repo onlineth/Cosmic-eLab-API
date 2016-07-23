@@ -150,4 +150,4 @@ Submit an issue or a feature request [here](https://github.com/onlineth/Cosmic-e
 
 # License
 
-[Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE](LICENSE)
+[Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE](https://github.com/onlineth/Cosmic-eLab-API/blob/master/LICENSE)
