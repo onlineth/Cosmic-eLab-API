@@ -3,7 +3,7 @@
 
 ---
 
-This is an API written for the Cosmic Ray eLab to provied an easier way of searching and download data files.
+This is an API written for the Cosmic Ray eLab to provied an easier way of searching and downloading data files.
 
 ## Setup
 
