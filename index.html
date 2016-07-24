@@ -149,9 +149,9 @@ main: {
 </code></pre>
 
 <h2>
-<a id="checkfilephp" class="anchor" href="#checkfilephp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CheckFile.php</h2>
+<a id="fileinfophp" class="anchor" href="#fileinfophp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FileInfo.php</h2>
 
-<p>Used to check a file before downloading it. The purpose is to verify it's on the file system before then going to the getfile.php script. If you just performed a recent searchfiles.php query, this probably isn't needed.</p>
+<p>Used to retrieve information about a particular file. Can also be used to make sure the file is on the disk before actually downloading it. The ouput includes if it was found, and if it was, providing information about the file like the DetectorID, Year, MonthDay, Index, and FileType.</p>
 
 <h3>
 <a id="parameters-1" class="anchor" href="#parameters-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Parameters</h3>
@@ -192,7 +192,14 @@ main: {
         pass: "true"
     },
     main: {
-        filefound: "true"
+        filefound: "true",
+        fileinfo: {
+            DetectorID: "6147",
+            Year: "2010",
+            MonthDay: "0404",
+            Index: "0",
+            FileType: "raw"
+        }
     }
 }
 </code></pre>
