@@ -19,11 +19,11 @@ This API uses the JSON format on returning information regarless of the informai
 
 ```
 {
-request: {
-	pass: "true"
-},
-main: {
-	searchfiles: "true"
+	request: {
+		pass: "true"
+	},
+	main: {
+		searchfiles: "true"
 }
 ```
 
@@ -158,4 +158,4 @@ Submit an issue or a feature request [here](https://github.com/onlineth/Cosmic-e
 
 # License
 
-[Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE](https://github.com/onlineth/Cosmic-eLab-API/blob/master/LICENSE)
+Licensed under the [GNU AFFERO GENERAL PUBLIC LICENSE](https://github.com/onlineth/Cosmic-eLab-API/blob/master/LICENSE)
