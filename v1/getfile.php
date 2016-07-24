@@ -59,7 +59,7 @@ function readfile_chunked($filepath, $retbytes = TRUE) {
 }
 
 # Ok, let's lookup the file
-if ($filepath = lookUpFile($db, $data_location, $allowed_filetypes)) {
+if ($filepath = lookUpFile($db, $data_location, $allowed_filetypes)[0]) {
 	if (!(readfile_chunked($filepath))) {
 		show_error('Could not dump the file.', 'Server Side Error');
 	}

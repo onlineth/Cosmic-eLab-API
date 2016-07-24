@@ -97,9 +97,9 @@ Commone file types include:
 }
 ```
 
-## CheckFile.php
+## FileInfo.php
 
-Used to check a file before downloading it. The purpose is to verify it's on the file system before then going to the getfile.php script. If you just performed a recent searchfiles.php query, this probably isn't needed.
+Used to retrieve information about a particular file. Can also be used to make sure the file is on the disk before actually downloading it. The ouput includes if it was found, and if it was, providing information about the file like the DetectorID, Year, MonthDay, Index, and FileType.
 
 ### Parameters
 
@@ -123,7 +123,14 @@ Or
 		pass: "true"
 	},
 	main: {
-		filefound: "true"
+		filefound: "true",
+		fileinfo: {
+			DetectorID: "6147",
+			Year: "2010",
+			MonthDay: "0404",
+			Index: "0",
+			FileType: "raw"
+		}
 	}
 }
 ```

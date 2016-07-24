@@ -90,12 +90,23 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 			show_error("The Index should be a number.", "filefound");
 		}
 
+		# Now get the FileID
+		$search_query = "SELECT fileid FROM api_files WHERE detectorid=$arg_detectorid AND year=$arg_year and monthday=$arg_monthday AND index=$arg_index AND filetype='$arg_filetype'";
+
+		# Perform the query and fetch the rows to an array
+		$arg_fileid = pg_fetch_row(db_pos_query($search_query, $db))[0];
+
 	} else {
 		# The filetype is for sure geo, just check the detectorid
 
 		# Get the GET parameters into their respective variables
 		$arg_detectorid = zFix($_GET['detectorid']);
 		$arg_filetype = $_GET['filetype'];
+
+		# Set null to all the others
+		$arg_year = null;
+		$arg_monthday = null;
+		$arg_index = null;
 
 		# detector id should be a 4 digit integer
 		if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) == 4)) {
@@ -126,5 +137,5 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 	}
 
 	# Finally, all done, return the actual file path
-	return $realFilePath;
+	return array($realFilePath, $arg_fileid, $arg_detectorid, $arg_year, $arg_monthday, $arg_index, $arg_filetype);
 }

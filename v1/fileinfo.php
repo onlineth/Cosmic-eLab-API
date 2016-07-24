@@ -1,9 +1,10 @@
 <?php
 # Author: Thomas Hein
 
-# The purpose of this file is to make sure a file exists on the file system before downloading it.
-# This file will send a response in JSON (the GetFile script will not, thus the existence of this script).
-# It will NOT check the database but will check the file on the system internally.
+# The purpose of this file is to Used to retrieve information about a particular file.
+# Can also be used to make sure the file is on the disk before actually downloading it.
+# The ouput includes if it was found, and if it was, providing information about the file
+# like the DetectorID, Year, MonthDay, Index, and FileType.
 
 # Check the file before loading it
 if (!file_exists("functions/start.php")) {
@@ -22,8 +23,11 @@ if (!file_exists("functions/filefunc.php")) {
 require_once "functions/filefunc.php";
 
 # Ok, let's lookup the file
-if (lookUpFile($db, $data_location, $allowed_filetypes)) {
-	$reponseArray = array("request" => array("pass" => "true"), "main" => array("filefound" => "true"));
+$fileinfo = lookUpFile($db, $data_location, $allowed_filetypes);
+
+# And check for a path
+if ($fileinfo[0]) {
+	$reponseArray = array("request" => array("pass" => "true"), "main" => array("filefound" => "true", "fileinfo" => array("fileid" => $fileinfo[1], "detectorid" => $fileinfo[2], "year" => $fileinfo[3], "monthday" => $fileinfo[4], "index" => $fileinfo[5], "filetype" => $fileinfo[6])));
 	print json_encode($reponseArray);
 } else {
 	$reponseArray = array("request" => array("pass" => "true"), "main" => array("filefound" => "false"));
