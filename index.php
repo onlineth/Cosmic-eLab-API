@@ -1,1 +1,3 @@
-You may want to head over <a href="https://github.com/onlineth/Cosmic-eLab-API">here</a> to get started.
+<?php
+header("Location: http://onlineth.js.org/Cosmic-eLab-API/");
+die();
