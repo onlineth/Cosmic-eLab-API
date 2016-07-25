@@ -35,9 +35,9 @@
 <ol>
 <li>Clone the repository in the directory you want it in: <code>git clone https://github.com/onlineth/Cosmic-eLab-API.git .</code>
 </li>
-<li>Rename the <code>config.sample.php</code> file and change it <code>config.php</code>
+<li>Rename the <code>config.sample.php</code> and change it to <code>config.php</code>
 </li>
-<li>Set the $data_location variable to the correct location of the data directory</li>
+<li>Set the <code>$data_location</code> variable to the correct location of the data directory</li>
 <li>Set the database credentials to their appropriate values</li>
 <li>Execute the createTables.sql in your database to create the table for the API</li>
 <li>Run the buildFileDatabase.php in your browser. Note: This process may take time and you may have to increase php's <a href="https://php.net/manual/en/info.configuration.php#ini.max-execution-time">max execution time</a> located in your php.ini file - when this completes, you should see a message displaying the number of files added to the table without any errors</li>
