@@ -3,7 +3,7 @@
 
 ---
 
-This is an API written for the Cosmic Ray eLab to provied an easier way of searching and downloading data files.
+This is an API written for the Cosmic Ray eLab to provided an easier way of searching and downloading data files.
 
 ## Setup
 
@@ -16,7 +16,7 @@ This is an API written for the Cosmic Ray eLab to provied an easier way of searc
 
 # How to use
 
-This API uses the JSON format on returning information regarless of the informaion (with the execption of downloading files and really big errors on the server's end). Each part of the API uses this basic structure:
+This API uses the JSON format on returning information regardless of the information (with the exception of downloading files and really big errors on the server's end). Each part of the API uses this basic structure:
 
 ```
 {
@@ -100,7 +100,7 @@ Commone file types include:
 
 ## FileInfo.php
 
-Used to retrieve information about a particular file. Can also be used to make sure the file is on the disk before actually downloading it. The ouput includes if it was found, and if it was, providing information about the file like the DetectorID, Year, MonthDay, Index, and FileType.
+Used to retrieve information about a particular file. Can also be used to make sure the file is on the disk before actually downloading it. The output includes if it was found, and if it was, providing information about the file like the DetectorID, Year, MonthDay, Index, and FileType.
 
 ### Parameters
 
@@ -139,7 +139,7 @@ Or
 
 ## GetFile.php
 
-This script will allow you to download a given file provided it's unquie parameters. This file has been created so it allows you to download the data file keeping it's filename intact.
+This script will allow you to download a given file provided it's unique parameters. This file has been created so it allows you to download the data file keeping it's filename intact.
 
 ### Parameters
 

@@ -1,5 +1,5 @@
 <?php
-# This file will not be visiable to the public
+# This file will not be visible to the public
 
 # Data Location
 $data_location = 'D:/Fermilab/Detector Files/';

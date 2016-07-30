@@ -3,7 +3,7 @@
 
 # The purpose of this file is to Used to retrieve information about a particular file.
 # Can also be used to make sure the file is on the disk before actually downloading it.
-# The ouput includes if it was found, and if it was, providing information about the file
+# The output includes if it was found, and if it was, providing information about the file
 # like the DetectorID, Year, MonthDay, Index, and FileType.
 
 # Check the file before loading it

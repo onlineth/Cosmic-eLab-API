@@ -3,7 +3,7 @@
 
 # This file will (quickly) run through every file in each detector's folder.
 # Depending on how PHP is setup, this may not working in the production version.
-# If this is the case, I can write a Python script to supplument.
+# If this is the case, I can write a Python script to supplement.
 
 # You may want to have this file get launched with a cron every say 15 minutes.
 # Currently, this file can be executed by the public. This may have to change.
@@ -33,10 +33,10 @@ $data_location_results = scandir($data_location);
 $counter = 0;
 
 # Set all files to inactive and then reactivate them as you go along.
-# This script acounts for deleted files
+# This script accounts for deleted files
 db_pos_query("UPDATE api_files SET active=false", $db);
 
-# The loop for directorys
+# The loop for directories
 foreach ($data_location_results as $current_detector_dir) {
 	# Skip this stuff
 	if ($current_detector_dir === '.' or $current_detector_dir === '..') {

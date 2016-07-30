@@ -2,10 +2,10 @@
 # Author: Thomas Hein
 
 # This file will help search for files. It requires a DetectorID, Year, and start & finish monthday.
-# Someone may specify a the specific monthday, specifc wanted files, and specific indexes.
-# This will be limited to 500 entries. Increase the NEXT paramertr to get more results.
+# Someone may specify a the specific monthday, specific wanted files, and specific indexes.
+# This will be limited to 500 entries. Increase the NEXT parameter to get more results.
 # This does not search the file system but only the database. Use the checkfile script to be
-# absolutly sure it's on the file system - although I don't know why files would go missing.
+# absolutely sure it's on the file system - although I don't know why files would go missing.
 # Note: StartMonthDay & EndMonthDay are including in the results (like NOT up to the beginning of
 #    EndMonthDay)
 
@@ -34,12 +34,12 @@ $arg_year = zFix($_GET['year']);
 
 # detector id should be a 4 digit integer
 if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) == 4)) {
-	show_error("The DetectorID is inncorrect. Make sure if there is a leading 0, to add it to the parameter.", "searchfiles");
+	show_error("The DetectorID is incorrect. Make sure if there is a leading 0, to add it to the parameter.", "searchfiles");
 }
 
 # year should be a 4 digit integer
 if (!(is_numeric($arg_year)) or !(strlen($arg_year) == 4)) {
-	show_error("The year given is inncorrect.", "searchfiles");
+	show_error("The year given is incorrect.", "searchfiles");
 }
 
 if (checkGetSet(array('monthday'))) {
@@ -64,7 +64,7 @@ if (checkGetSet(array('monthday'))) {
 	}
 
 	if ($arg_startmonthday > $arg_endmonthday) {
-		show_error("The Start MonthDay cannot be greator than the End MonthDay.", "searchfiles");
+		show_error("The Start MonthDay cannot be greater than the End MonthDay.", "searchfiles");
 	}
 }
 
@@ -125,7 +125,7 @@ $query_result = pg_fetch_all(db_pos_query($search_query, $db));
 
 # Check if any
 if (!($query_result)) {
-	# There arn't any
+	# There aren't any
 	$reponseArray = array("request" => array("pass" => "true"), "main" => array("searchfiles" => "true"), "filelist" => '', "numberOfFiles" => '0', 'limit' => 500);
 	print json_encode($reponseArray);
 

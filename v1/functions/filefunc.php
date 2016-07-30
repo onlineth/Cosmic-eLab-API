@@ -2,7 +2,7 @@
 # Author: Thomas Hein
 
 # File Functions
-# I hate writting the same piece of code twice, so I create functions in files that will be used twice.
+# I hate writing the same piece of code twice, so I create functions in files that will be used twice.
 
 # Check the file before loading it
 if (!file_exists("functions/start.php")) {
@@ -15,7 +15,7 @@ require_once "functions/start.php";
 function lookUpFile($db, $data_location, $allowed_filetypes) {
 	# This file will check to see if the arguments given in the GET request look ok
 	# This file will return 1 if it has completed. It really shouldn't return anything
-	# if it has failded as it will call "show_error".
+	# if it has fielded as it will call "show_error".
 
 	# Check to see if needed arguments are given
 	if (((checkGetSet(array("detectorid", "filetype"))) or !(checkGetSet(array("fileid"))))) {
