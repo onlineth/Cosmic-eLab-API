@@ -40,8 +40,8 @@ Used to find files given on specific parameters
 
 #### Required
 
-- `detectorid` - A four digit code that's unique to every detector, example `6147`.
-- `year` - Must be one year at a time, example `2010`.
+- `detectorid` - A 1-4 digit code that's unique to every detector, example `6147`
+- `year` - Must be one year at a time, example `2010`
 
 Either one Month and Day:
 
@@ -106,7 +106,7 @@ Used to retrieve information about a particular file. Can also be used to make s
 
 #### Required
 
-- `detectorid` - A four digit code that's unique to every detector, example `6147`
+- `detectorid` - A 1-4 digit code that's unique to every detector, example `6147`
 - `year` - Must be one year at a time, example `2010`
 - `monthday` - A four digit number where the first two digits represent the month and the last two represent the day, example `0204`
 - `index` - A specific index of a file, example `0`
@@ -143,7 +143,7 @@ This script will allow you to download a given file provided it's unique paramet
 
 ### Parameters
 
-- `detectorid` - A four digit code that's unique to every detector, example `6147`
+- `detectorid` - A 1-4 digit code that's unique to every detector, example `6147`
 - `year` - Must be one year at a time, example `2010`
 - `monthday` - A four digit number where the first two digits represent the month and the last two represent the day, example `0204`
 - `index` - A specific index of a file, example `0`

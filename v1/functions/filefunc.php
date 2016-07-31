@@ -25,7 +25,6 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 		if (!(checkGetSet(array("detectorid", "year", "monthday", "index", "filetype"))) && $_GET['filetype'] != "geo") {
 			show_error("You do not have proper arguments setup for this request.", "filefound");
 		}
-
 	}
 
 	# Validate Credentials & set argument variables
@@ -50,7 +49,7 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 		}
 
 		# Set the other arguments
-		$arg_detectorid = zFix($query_result[1]);
+		$arg_detectorid = $query_result[1];
 		$arg_year = zFix($query_result[2]);
 		$arg_monthday = zFix($query_result[3]);
 		$arg_index = zFix($query_result[4]);
@@ -59,14 +58,14 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 	} elseif ($_GET['filetype'] != "geo") {
 
 		# Get the GET parameters into their respective variables
-		$arg_detectorid = zFix($_GET['detectorid']);
+		$arg_detectorid = $_GET['detectorid'];
 		$arg_year = zFix($_GET['year']);
 		$arg_monthday = zFix($_GET['monthday']);
 		$arg_index = zFix($_GET['index']);
 		$arg_filetype = $_GET['filetype'];
 
-		# detector id should be a 4 digit integer
-		if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) == 4)) {
+		# detector id should be a 4 or less digit integer
+		if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) <= 4)) {
 			show_error("The DetectorID is inncorrect.", "filefound");
 		}
 
@@ -100,7 +99,7 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 		# The filetype is for sure geo, just check the detectorid
 
 		# Get the GET parameters into their respective variables
-		$arg_detectorid = zFix($_GET['detectorid']);
+		$arg_detectorid = $_GET['detectorid'];
 		$arg_filetype = $_GET['filetype'];
 
 		# Set null to all the others
@@ -108,8 +107,8 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 		$arg_monthday = null;
 		$arg_index = null;
 
-		# detector id should be a 4 digit integer
-		if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) == 4)) {
+		# detector id should be a 4 or less digit integer
+		if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) <= 4)) {
 			show_error("The DetectorID is inncorrect.", "filefound");
 		}
 	}

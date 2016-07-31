@@ -29,12 +29,12 @@ if (!((checkGetSet(array('startmonthday', 'endmonthday'))) or (checkGetSet(array
 	show_error('You need to specify a StartMonthDay & an EndMonthDay OR simply give a MonthDay', 'searchfiles');
 }
 
-$arg_detectorid = zFix($_GET['detectorid']);
+$arg_detectorid = $_GET['detectorid'];
 $arg_year = zFix($_GET['year']);
 
-# detector id should be a 4 digit integer
-if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) == 4)) {
-	show_error("The DetectorID is incorrect. Make sure if there is a leading 0, to add it to the parameter.", "searchfiles");
+# detector id should be a 4 or less digit integer
+if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) <= 4)) {
+	show_error("The DetectorID is incorrect.", "searchfiles");
 }
 
 # year should be a 4 digit integer
@@ -80,7 +80,6 @@ if (isset($arg_monthday)) {
 }
 
 # Add index if any
-# I'm really not sure how this would be of use but whatever
 if (isset($_GET['index'])) {
 
 	$arg_index = zFix($_GET['index']);
@@ -139,8 +138,6 @@ if (!($query_result)) {
 		# $cfr means current file result (short to save space)
 		$current_file_result_array = array('fileid' => $cfr['fileid'], 'detectorid' => $cfr['detectorid'], 'year' => $cfr['year'], 'monthday' => $cfr['monthday'], 'index' => $cfr['index'], 'filetype' => $cfr['filetype']);
 		array_push($file_list, $current_file_result_array);
-		# var_dump($cfr);
-		# die();
 	}
 
 	# All done, spit this out
@@ -148,4 +145,5 @@ if (!($query_result)) {
 	print json_encode($reponseArray);
 }
 
+# Quitting time
 quit($db);

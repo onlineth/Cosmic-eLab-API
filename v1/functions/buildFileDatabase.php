@@ -10,8 +10,8 @@
 
 # Define some functions that will help but not really in any other script
 function chk4n($test) {
-	# This function will check to see if $test is 4 numbers
-	if (is_numeric($test) && strlen($test) == 4) {
+	# This function will check to see if $test is at most 4 numbers
+	if (is_numeric($test) && strlen($test) <= 4) {
 		return 1;
 	} else {
 		return 0;
@@ -47,7 +47,7 @@ foreach ($data_location_results as $current_detector_dir) {
 		# It's a directory, let's check to make sure it's a detector
 
 		if (chk4n($current_detector_dir)) {
-			# It's a directory that's name has 4 numbers (looks like a detector's folder)
+			# It's a directory that's name has at most 4 numbers (looks like a detector's folder)
 
 			# Let's loop over the files in that folder
 			$current_detector_dir_results = scandir($data_location . '/' . $current_detector_dir);
@@ -59,9 +59,10 @@ foreach ($data_location_results as $current_detector_dir) {
 					continue;
 				}
 
-				# Let's pick the current file apart and check if
-				# if (!$last_pos_per = strrpos($current_file, '.')) continue;
-				$current_file_detectorID = substr($current_file, 0, 4);
+				# Let's pick the current file apart
+
+				# Get the detector ID
+				$current_file_detectorID = substr($current_file, 0, strpos($current_file, '.'));
 
 				# Check if it's a geo file
 				if ($current_file == "$current_file_detectorID.geo") {
@@ -70,6 +71,7 @@ foreach ($data_location_results as $current_detector_dir) {
 					$current_file_monthday = '0';
 					$current_file_index = '0';
 					$current_file_type = 'geo';
+
 				} else {
 					# It is not a geo file
 					$current_file_year = substr($current_file, 5, 4);
@@ -92,7 +94,6 @@ foreach ($data_location_results as $current_detector_dir) {
 						# It's raw
 						$current_file_type = 'raw';
 						$current_file_index = $current_file_lastPart;
-						# print "Raw Index: $current_file -- $current_file_detectorID.$current_file_year.$current_file_monthday.$current_file_index<br>";
 					}
 
 					# Check to see if what we have is the real thing
@@ -109,8 +110,8 @@ foreach ($data_location_results as $current_detector_dir) {
 					}
 				}
 				# Ok, we have everything ready to go - let's add this stuff to the db
-				# Check if it's not in there already
 
+				# Check if it's not in there already
 				$search_query = "SELECT * FROM api_files WHERE detectorid=$current_file_detectorID AND year=$current_file_year AND monthday=$current_file_monthday AND index=$current_file_index AND filetype='$current_file_type'";
 
 				if (!(pg_fetch_row(db_pos_query($search_query, $db))[0])) {
