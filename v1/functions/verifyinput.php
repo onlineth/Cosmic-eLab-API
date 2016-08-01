@@ -46,6 +46,8 @@ function chk_index($arg_index) {
 	$arg_index = zFix($arg_index);
 	if (!(is_numeric($arg_index))) {
 		show_error("The Index should be a number.", "searchfiless");
+	} else {
+		return $arg_index;
 	}
 }
 
