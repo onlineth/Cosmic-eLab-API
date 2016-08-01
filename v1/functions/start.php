@@ -12,6 +12,14 @@ if (substr(getcwd(), -9) == "functions") {
 	$openDirectory = substr(getcwd(), 0, -3);
 }
 
+# Check the verifyinput file before opening it
+if (!file_exists("$openDirectory\\v1\\functions\\verifyinput.php")) {
+	die("Server-Side Error: Unable to find verify input file\n");
+}
+
+# Get the script to load functions for verifying user input
+require_once "$openDirectory\\v1\\functions\\verifyinput.php";
+
 # Check the file before loading it
 if (!file_exists("$openDirectory/config.php")) {
 	die("Server-Side Error: Unable to find configeration file\n");
@@ -37,7 +45,10 @@ if (!$db) {
 # List of functions to use over the entire API
 
 # Show an error based in JSON format
-function show_error($error_msg, $type) {
+function show_error($error_msg, $type = '$$$$$') {
+	if ($type = '$$$$$') {
+		$type = substr(basename($_SERVER['PHP_SELF']), 0, -4);
+	}
 	header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
 	$reponseArray = array("request" => array("pass" => "false"), "main" => array($type => "false", "message" => $error_msg));
 
@@ -72,13 +83,4 @@ function checkGetSet($givenArray) {
 # This should be run when the php connection is about to close
 function quit($db) {
 	pg_close($db);
-}
-
-# This function fixes GET arguments where if the the leading number if 0 is removed,
-# this will add it back as a string.
-function zFix($num) {
-	if (strlen($num) == 3) {
-		return "0$num";
-	}
-	return $num;
 }

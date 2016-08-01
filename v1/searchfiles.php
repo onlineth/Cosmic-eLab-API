@@ -1,4 +1,4 @@
-<?php
+ <?php
 # Author: Thomas Hein
 
 # This file will help search for files. It requires a DetectorID, Year, and start & finish monthday.
@@ -21,50 +21,26 @@ require_once "functions/start.php";
 
 # We need these
 if (!(checkGetSet(array('detectorid', 'year')))) {
-	show_error('You need to specify a DetectorID and a Year', 'searchfiles');
+	show_error('You need to specify a DetectorID and a Year');
 }
 
 # Need either an exact monthday or a start monthday and finish monthday
 if (!((checkGetSet(array('startmonthday', 'endmonthday'))) or (checkGetSet(array('monthday'))))) {
-	show_error('You need to specify a StartMonthDay & an EndMonthDay OR simply give a MonthDay', 'searchfiles');
+	show_error('You need to specify a StartMonthDay & an EndMonthDay OR simply give a MonthDay');
 }
 
-$arg_detectorid = $_GET['detectorid'];
-$arg_year = zFix($_GET['year']);
-
-# detector id should be a 4 or less digit integer
-if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) <= 4)) {
-	show_error("The DetectorID is incorrect.", "searchfiles");
-}
-
-# year should be a 4 digit integer
-if (!(is_numeric($arg_year)) or !(strlen($arg_year) == 4)) {
-	show_error("The year given is incorrect.", "searchfiles");
-}
+$arg_detectorid = chk_detectorid($_GET['detectorid']);
+$arg_year = chk_year($_GET['year']);
 
 if (checkGetSet(array('monthday'))) {
-	$arg_monthday = zFix($_GET['monthday']);
+	$arg_monthday = chk_monthday($_GET['monthday']);
 
-	# monthday should be a 4 digit integer
-	if (!(is_numeric($arg_monthday)) or !(strlen($arg_monthday) == 4)) {
-		show_error("The MonthDay is incorrect.", "searchfiles");
-	}
 } else {
-	$arg_startmonthday = zFix($_GET['startmonthday']);
-	$arg_endmonthday = zFix($_GET['endmonthday']);
-
-	# monthday should be a 4 digit integer
-	if (!(is_numeric($arg_startmonthday)) or !(strlen($arg_startmonthday) == 4)) {
-		show_error("The Start MonthDay is incorrect.", "searchfiles");
-	}
-
-	# monthday should be a 4 digit integer
-	if (!(is_numeric($arg_endmonthday)) or !(strlen($arg_endmonthday) == 4)) {
-		show_error("The End MonthDay is incorrect.", "searchfiles");
-	}
+	$arg_startmonthday = chk_monthday($_GET['startmonthday'], 'Start MonthDay');
+	$arg_endmonthday = chk_monthday($_GET['endmonthday'], 'End MonthDay');
 
 	if ($arg_startmonthday > $arg_endmonthday) {
-		show_error("The Start MonthDay cannot be greater than the End MonthDay.", "searchfiles");
+		show_error("The Start MonthDay cannot be greater than the End MonthDay.");
 	}
 }
 
@@ -82,12 +58,7 @@ if (isset($arg_monthday)) {
 # Add index if any
 if (isset($_GET['index'])) {
 
-	$arg_index = zFix($_GET['index']);
-
-	# Index should be an integer
-	if (!(is_numeric($arg_index))) {
-		show_error("The Index should be a number.", "searchfiless");
-	}
+	$arg_index = chk_index($_GET['index']);
 
 	$query_where = "$query_where AND index=$arg_index";
 }
@@ -103,14 +74,13 @@ foreach ($allowed_filetypes as $current_filetype) {
 
 		# Check if it's a boolean (1 or 0)
 		if (!($current_filetype_arg == '1' or $current_filetype_arg == '0')) {
-			show_error("The FileType: $current_filetype must be an boolean.", "searchfiless");
+			show_error("The FileType: $current_filetype must be an boolean.");
 		}
 		# It's a boolean, add it to the where query
 		# If it's not, remove it (all filetypes are shown by default & design)
 		if (!($current_filetype_arg)) {
 			# We don't want this filetype
 			$query_where = "$query_where AND filetype!='$current_filetype'";
-
 		}
 	}
 }

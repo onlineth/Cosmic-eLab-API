@@ -64,7 +64,7 @@ if ($filepath = lookUpFile($db, $data_location, $allowed_filetypes)[0]) {
 		show_error('Could not dump the file.', 'Server Side Error');
 	}
 } else {
-	show_error('Could not find the file', 'getfile');
+	show_error('Could not find the file');
 }
 
 quit($db);

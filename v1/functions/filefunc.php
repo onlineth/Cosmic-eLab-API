@@ -20,22 +20,17 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 	# Check to see if needed arguments are given
 	if (((checkGetSet(array("detectorid", "filetype"))) or !(checkGetSet(array("fileid"))))) {
 		if (!checkGetSet(array("detectorid", "filetype"))) {
-			show_error("You do not have proper arguments setup for this request.", "filefound");
+			show_error("You do not have proper arguments setup for this request.");
 		}
 		if (!(checkGetSet(array("detectorid", "year", "monthday", "index", "filetype"))) && $_GET['filetype'] != "geo") {
-			show_error("You do not have proper arguments setup for this request.", "filefound");
+			show_error("You do not have proper arguments setup for this request.");
 		}
 	}
 
 	# Validate Credentials & set argument variables
 	if (isset($_GET['fileid'])) {
 		# Get the GET parameters into their respective variables
-		$arg_fileid = $_GET['fileid'];
-
-		# FileID should be an integer
-		if (!is_numeric($arg_fileid)) {
-			show_error("The FileID given is not numerical.", "filefound");
-		}
+		$arg_fileid = chk_fileid($_GET['fileid']);
 
 		# Lookup the fileid in the database
 		$search_query = "SELECT * FROM api_files WHERE fileid=$arg_fileid";
@@ -45,7 +40,7 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 
 		# Check to see if there's something actually there
 		if (!($query_result[0])) {
-			show_error("No file has been found with the given FileID.", "filefound");
+			show_error("No file has been found with the given FileID.");
 		}
 
 		# Set the other arguments
@@ -58,36 +53,11 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 	} elseif ($_GET['filetype'] != "geo") {
 
 		# Get the GET parameters into their respective variables
-		$arg_detectorid = $_GET['detectorid'];
-		$arg_year = zFix($_GET['year']);
-		$arg_monthday = zFix($_GET['monthday']);
-		$arg_index = zFix($_GET['index']);
-		$arg_filetype = $_GET['filetype'];
-
-		# detector id should be a 4 or less digit integer
-		if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) <= 4)) {
-			show_error("The DetectorID is inncorrect.", "filefound");
-		}
-
-		# year should be a 4 digit integer
-		if (!(is_numeric($arg_year)) or !(strlen($arg_year) == 4)) {
-			show_error("The year given is inncorrect.", "filefound");
-		}
-
-		# monthday should be a 4 digit integer
-		if (!(is_numeric($arg_monthday)) or !(strlen($arg_monthday) == 4)) {
-			show_error("The MonthDay is incorrect.", "filefound");
-		}
-
-		# FileType should be an integer
-		if (!in_array($arg_filetype, $allowed_filetypes)) {
-			show_error("The file type is not on the accepted file type list.", "filefound");
-		}
-
-		# Index should be an integer
-		if (!(is_numeric($arg_index))) {
-			show_error("The Index should be a number.", "filefound");
-		}
+		$arg_detectorid = chk_detectorid($_GET['detectorid']);
+		$arg_year = chk_year($_GET['year']);
+		$arg_monthday = chk_monthday($_GET['monthday']);
+		$arg_index = chk_index($_GET['index']);
+		$arg_filetype = chk_filetype($_GET['filetype'], $allowed_filetypes);
 
 		# Now get the FileID
 		$search_query = "SELECT fileid FROM api_files WHERE detectorid=$arg_detectorid AND year=$arg_year and monthday=$arg_monthday AND index=$arg_index AND filetype='$arg_filetype'";
@@ -99,18 +69,13 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 		# The filetype is for sure geo, just check the detectorid
 
 		# Get the GET parameters into their respective variables
-		$arg_detectorid = $_GET['detectorid'];
-		$arg_filetype = $_GET['filetype'];
+		$arg_detectorid = chk_detectorid($_GET['detectorid']);
+		$arg_filetype = chk_filetype($_GET['filetype'], $allowed_filetypes);
 
 		# Set null to all the others
 		$arg_year = null;
 		$arg_monthday = null;
 		$arg_index = null;
-
-		# detector id should be a 4 or less digit integer
-		if (!(is_numeric($arg_detectorid)) or !(strlen($arg_detectorid) <= 4)) {
-			show_error("The DetectorID is inncorrect.", "filefound");
-		}
 	}
 
 	# I don't know why there are spaces in here, but there are so...
