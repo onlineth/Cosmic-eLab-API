@@ -50,6 +50,9 @@ if ($return_query) {
 	$state_abb = '';
 }
 
+# Find Schools
+$return_query_schools = pg_fetch_all(db_pos_query("SELECT name, id FROM school WHERE city_id=$arg_cityid", $db));
+
 # Find Research Groups
 $return_query = pg_fetch_all(db_pos_query("SELECT distinct dt.detectorid
 FROM (select research_group_id, detectorid from (SELECT ROW_NUMBER() OVER (PARTITION BY detectorid ORDER BY rnum2) as rnum1, research_group_id, detectorid FROM
@@ -65,5 +68,5 @@ INNER JOIN city ct
     on sc.city_id = ct.id
 WHERE ct.id = $arg_cityid", $db));
 
-$reponseArray = array("request" => array("pass" => "true"), "main" => array("city" => "found", "cityinfo" => array("id" => $arg_cityid, "name" => $arg_cityname), "stateinfo" => array("name" => $state_name, "abbreviation" => $state_abb), "detectors" => $return_query));
+$reponseArray = array("request" => array("pass" => "true"), "main" => array("city" => "found", "cityinfo" => array("id" => $arg_cityid, "name" => $arg_cityname), "stateinfo" => array("name" => $state_name, "abbreviation" => $state_abb), "schools" => $return_query_schools, "detectors" => $return_query));
 print json_encode($reponseArray);
