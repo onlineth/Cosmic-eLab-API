@@ -83,3 +83,20 @@ function chk_cityname($arg_cityname) {
 	# Just clean it
 	return clean($arg_cityname);
 }
+
+# Research Group ID
+function chk_researchgroupid($arg_researchgroupid) {
+	if (!is_numeric($arg_researchgroupid)) {
+		show_error("The ResearchGroupID given is not numerical.");
+	} else {
+		return $arg_researchgroupid;
+	}
+}
+
+# Research Group Name
+function chk_researchgroupname($arg_researchgroupname) {
+	# Decode it
+	$arg_researchgroupname = urldecode($arg_researchgroupname);
+	# Just clean it
+	return clean($arg_researchgroupname);
+}
