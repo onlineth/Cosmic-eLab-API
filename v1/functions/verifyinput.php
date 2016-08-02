@@ -68,3 +68,18 @@ function chk_filetype($arg_filetype, $allowed_filetypes) {
 		return $arg_filetype;
 	}
 }
+
+# City ID
+function chk_cityid($arg_cityid) {
+	if (!is_numeric($arg_cityid)) {
+		show_error("The CityID given is not numerical.");
+	} else {
+		return $arg_cityid;
+	}
+}
+
+# City Name
+function chk_cityname($arg_cityname) {
+	# Just clean it
+	return clean($arg_cityname);
+}
