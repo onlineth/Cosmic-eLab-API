@@ -13,7 +13,7 @@ if (!file_exists("functions/start.php")) {
 require_once "functions/start.php";
 
 # Either ID or Name
-if ((checkGetSet(array('cityid'))) and (checkGetSet(array('cityname')))) {
+if (!((checkGetSet(array('cityid'))) or (checkGetSet(array('cityname'))))) {
 	show_error('You need to specify either a CityID or a CityName.');
 }
 
