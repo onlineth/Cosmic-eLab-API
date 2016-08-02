@@ -80,6 +80,12 @@ function checkGetSet($givenArray) {
 	return 1;
 }
 
+# Sanitize a variable/input
+function clean($text) {
+	# Note: Adds a quote to the beginning and end of the string
+	return pg_escape_literal($text);
+}
+
 # This should be run when the php connection is about to close
 function quit($db) {
 	pg_close($db);
