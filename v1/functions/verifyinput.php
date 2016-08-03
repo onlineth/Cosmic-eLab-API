@@ -100,3 +100,20 @@ function chk_researchgroupname($arg_researchgroupname) {
 	# Just clean it
 	return clean($arg_researchgroupname);
 }
+
+# School ID
+function chk_schoolid($arg_schoolid) {
+	if (!is_numeric($arg_schoolid)) {
+		show_error("The ResearchGroupID given is not numerical.");
+	} else {
+		return $arg_schoolid;
+	}
+}
+
+# School Name
+function chk_schoolname($arg_schoolname) {
+	# Decode it
+	$arg_schoolname = urldecode($arg_schoolname);
+	# Just clean it
+	return clean($arg_schoolname);
+}
