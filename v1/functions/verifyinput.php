@@ -104,7 +104,7 @@ function chk_researchgroupname($arg_researchgroupname) {
 # School ID
 function chk_schoolid($arg_schoolid) {
 	if (!is_numeric($arg_schoolid)) {
-		show_error("The ResearchGroupID given is not numerical.");
+		show_error("The StateID given is not numerical.");
 	} else {
 		return $arg_schoolid;
 	}
