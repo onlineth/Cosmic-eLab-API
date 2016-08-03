@@ -76,6 +76,9 @@ function checkGetSet($givenArray) {
 		if (!isset($_GET[$element])) {
 			return 0;
 		}
+		if ($_GET[$element] == '') {
+			return 0;
+		}
 	}
 	return 1;
 }
