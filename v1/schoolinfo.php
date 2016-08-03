@@ -64,7 +64,7 @@ $state_abb = $return_row[14];
 
 # Find Research Groups
 $return_query = pg_fetch_all(db_pos_query("SELECT distinct dt.detectorid
-FROM (select research_group_id, detectorid from (SELECT ROW_NUMBER() OVER (PARTITION BY detectorid ORDER BY rnum2) as rnum1, research_group_id, detectorid FROM
+FROM (select research_group_id, detectorid from (SELECT ROW_NUMBER() OVER (PARTITION BY detectorid ORDER BY rnum2 DESC) as rnum1, research_group_id, detectorid FROM
   (SELECT ROW_NUMBER() OVER () as rnum2, research_group_id, detectorid FROM research_group_detectorid)
     as temp ORDER BY detectorid) as temp2 where temp2.rnum1 = 1) as dt
 INNER JOIN research_group rg
