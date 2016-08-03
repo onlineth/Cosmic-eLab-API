@@ -1,6 +1,6 @@
 <?php
 
-# This file is for verifying varius types of inputs given from the user
+# This file is for verifying various types of inputs given from the user
 
 # This function fixes GET arguments where if the the leading number if 0 is removed,
 # this will add it back as a string.

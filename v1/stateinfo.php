@@ -50,7 +50,7 @@ WHERE st.id = $arg_stateid", $db);
 $schools = array_combine(array_unique(pg_fetch_all_columns($return_query, 0)), array_unique(pg_fetch_all_columns($return_query, 1)));
 $cities = array_combine(array_unique(pg_fetch_all_columns($return_query, 3)), array_unique(pg_fetch_all_columns($return_query, 4)));
 
-# Find Research Groups
+# Find Detectors
 $return_query = pg_fetch_all(db_pos_query("SELECT distinct dt.detectorid
 FROM (select research_group_id, detectorid from (SELECT ROW_NUMBER() OVER (PARTITION BY detectorid ORDER BY rnum2 DESC) as rnum1, research_group_id, detectorid FROM
   (SELECT ROW_NUMBER() OVER () as rnum2, research_group_id, detectorid FROM research_group_detectorid)

@@ -3,7 +3,7 @@
 
 # The purpose of this file is to display the status of the API
 # It will do a basic check of the connection to the database
-# as well as check if important files exsists. It only will
+# as well as check if important files exists. It only will
 # show the first error it finds and then die.
 
 # Disable error reporting from PHP

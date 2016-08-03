@@ -2,7 +2,7 @@
 # Author: Thomas Hein
 
 # Input: City or it's ID
-# Output: State, Schools, Detetors
+# Output: State, Schools, Detectors
 
 # Check the file before loading it
 if (!file_exists("functions/start.php")) {
@@ -53,7 +53,7 @@ if ($return_query) {
 # Find Schools
 $return_query_schools = pg_fetch_all(db_pos_query("SELECT name, id FROM school WHERE city_id=$arg_cityid", $db));
 
-# Find Research Groups
+# Find Detectors
 $return_query = pg_fetch_all(db_pos_query("SELECT distinct dt.detectorid
 FROM (select research_group_id, detectorid from (SELECT ROW_NUMBER() OVER (PARTITION BY detectorid ORDER BY rnum2 DESC) as rnum1, research_group_id, detectorid FROM
   (SELECT ROW_NUMBER() OVER () as rnum2, research_group_id, detectorid FROM research_group_detectorid)
