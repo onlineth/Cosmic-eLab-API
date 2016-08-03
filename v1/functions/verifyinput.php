@@ -134,3 +134,12 @@ function chk_statename($arg_statename) {
 	# Just clean it
 	return clean($arg_statename);
 }
+
+# Teacher ID
+function chk_teacherid($arg_teacherid) {
+	if (!is_numeric($arg_teacherid)) {
+		show_error("The TeacherID given is not numerical.");
+	} else {
+		return $arg_teacherid;
+	}
+}
