@@ -76,6 +76,7 @@ function lookUpFile($db, $data_location, $allowed_filetypes) {
 		$arg_year = null;
 		$arg_monthday = null;
 		$arg_index = null;
+		$arg_fileid = pg_fetch_row(db_pos_query("SELECT fileid FROM api_files WHERE detectorid=$arg_detectorid and filetype='geo'", $db))[0];
 	}
 
 	# I don't know why there are spaces in here, but there are so...
